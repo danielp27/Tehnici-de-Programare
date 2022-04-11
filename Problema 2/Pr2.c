@@ -1,5 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
-#define MAX_SIZE 1000
+#define MAX_ELEM 1000
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -44,16 +44,53 @@ void push(int* size, int* stack, int valToAdd) {
 
 // functie pentru extragerea elementului din varful stivei (il "scoate" din stiva si il returneaza)
 // valoarea variabilei size se poate modifica in interiorul functiei, asa ca transmitem variabila prin referinta
-int pop(int* size, int* stack) {
+char pop(int *size, char *stack) {
 	(*size)--;							// se decrementeaza valoarea variabilei size (practic se ignora valoarea din varful stivei, va fi la un moment dat suprascrisa de un push cu o alta valoare, si se actualizeaza varful ca fiind cu o pozitie mai jos)
-	return stack[*size];				// se returneaza valoarea fostului varf al stivei (adica elementul extras)
+	return stack[*size];			// se returneaza valoarea fostului varf al stivei (adica elementul extras)
 }
 
-// stack -> stiva, in cazul nostru e de tip int si poate avea maxim 100 de elemente
-// size -> retine marimea stivei, stack[size - 1] fiind elementul din varful stivei
+//functie pentru "vizualizarea" elementului din varful stivei (nu il si scoate din stiva)
+char getTop(int size, char *stack) {
+	return stack[size - 1];
+}
+
+// functie pentru determinarea prioritatii operatorului/operandului dat ca parametru
+int getPriority(char op) {
+	switch (op) {
+	case '(':
+	case ')':
+		return 0;
+	case '*':
+	case '/':
+		return 1;
+	case '+':
+	case '-':
+		return 2;
+	default:
+		return 3;
+	}
+}
 
 int main() {
+	char st[MAX_ELEM], fp[MAX_ELEM], buffer[MAX_ELEM], *input, op;
+	int size_st = 0, size_fp = 0, length, priority;
 
+	// citim expresia de la tastatura
+	printf("Expresia este: ");
+	fgets(buffer, MAX_ELEM, stdin);		// stdin -> standard input (tastatura)
+	length = strlen(buffer);
+
+	// stergem "new line"-ul de la finalul citirii
+	if (buffer[length - 1] == '\n') {
+		buffer[length - 1] = 0;
+		length--;
+	}
+
+	// alocam spatiu pentru expresia citita si cele doua paranteze -> (E)
+	input = (char *)malloc(sizeof(char) * (length + 3));
+	strcpy(input, "(");
+	strcat(input, buffer);
+	strcat(input, ")");
 
 
 	return 0;
