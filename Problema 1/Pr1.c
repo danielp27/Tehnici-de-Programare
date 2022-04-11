@@ -7,8 +7,8 @@ unsigned int oglindire_biti(unsigned int x){
 
 	while(x > 0) {
 		y <<= 1;
-		if(x & (1 == 1))
-			y ^=1;
+		if((x & 1) == 1)
+			y ^= 1;
 		x >>= 1;
 	}
 
@@ -20,5 +20,7 @@ int main() {
 	printf("Introduceti un numar intreg x: ");
 	scanf("%d", &x);
 	printf("y = %d", oglindire_biti(x));
+
+	system('pause');
 	return 0;
 }
