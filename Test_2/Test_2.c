@@ -4,9 +4,7 @@
 int n;
 
 int xor(int v[100]) {
-	int i;
-	for (i = 0; i < n; i++)
-		return i ^ xor(v[i - 1]);
+	return n ^ xor(v[n - 1]);
 }
 
 int main() {
