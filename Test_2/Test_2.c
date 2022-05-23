@@ -4,7 +4,11 @@
 int n;
 
 int xor(int v[100]) {
-	return n ^ xor(v[n - 1]);
+	int i, x = 0;
+	for (i = 0; i < n; i++) {
+		return xor (x ^= v[i]);
+	}
+
 }
 
 int main() {
