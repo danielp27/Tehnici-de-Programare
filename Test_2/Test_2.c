@@ -1,13 +1,16 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 
-int xor(int v[100], int n) {
+int n;
 
+int xor(int v[100]) {
+	int i;
+	for (i = 0; i < n; i++)
+		return i ^ xor(v[i - 1]);
 }
 
 int main() {
-	int n, i, v[100];
-	FILE *f;
+	int i, v[100];
 
 	printf("Introduceti numarul de elemente din vector: ");
 	scanf("%d", &n);
@@ -17,6 +20,8 @@ int main() {
 		printf("v[%d] = ", i);
 		scanf("%d", &v[i]);
 	}
+
+	printf("\n%d", xor(v));
 
 	return 0;
 }
